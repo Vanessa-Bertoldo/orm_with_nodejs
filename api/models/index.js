@@ -1,3 +1,5 @@
+//gerencia os modelos do bancos
+
 'use strict';
 
 const fs = require('fs');
