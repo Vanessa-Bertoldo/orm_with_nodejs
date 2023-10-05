@@ -1,0 +1,2 @@
+//Table Pessoas
+npx sequelize-cli model:create --name Pessoas --attributes nome:string,ativo:boolean,e-mail:string,role:string
