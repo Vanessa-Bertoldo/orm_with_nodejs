@@ -11,6 +11,8 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      Niveis.hasMany(models.Turmas, {foreignKey: "nivel_id"}) //relacionamento 1:N
+
     }
   }
   Niveis.init({

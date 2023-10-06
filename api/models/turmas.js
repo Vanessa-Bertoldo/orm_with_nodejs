@@ -11,7 +11,11 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-    }
+      Turmas.hasMany(models.Matriculas, {foreignKey: "turma_id"})//relacionamento 1:N
+      Turmas.belongsTo(models.Pessoas, {foreignKey: "docente_id"}) //Turma pertence a Pessoas, por se tratar da outra ponta do relacionamento
+      Turmas.belongsTo(models.Niveis, {foreignKey: "nivel_id"})
+
+    } 
   }
   Turmas.init({
     data_inicio: DataTypes.DATEONLY
