@@ -1,2 +1,9 @@
+//========================CREATE TABLES===============================================================================
 //Table Pessoas
 npx sequelize-cli model:create --name Pessoas --attributes nome:string,ativo:boolean,e-mail:string,role:string
+//Table Nível
+npx sequelize-cli model:create --name Niveis --attributes desc_nivel:string
+//Table Turma 
+npx sequelize-cli model:create --name Turmas --attributes data_inicio:dateonly
+//Table Matricula
+npx sequelize-cli model:create --name Matriculas --attributes status:string
