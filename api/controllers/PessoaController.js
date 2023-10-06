@@ -33,5 +33,42 @@ class PessoaController {
             return res.status(500).json(e.message)
         }
     }
+
+    //update register
+    static async updatePeople(req, res){
+        const { id } = req.params
+        const newInfos = req.body
+        try{
+            await database.Pessoas.update(newInfos, {
+                where: {
+                    id: Number(id)
+                }
+            })
+         
+            const peopleInfosUpdate = await database.Pessoas.findOne({ //retorna o registro atualizado
+                where: {
+                    id: Number(id)}
+            })
+
+            return res.status(200).json(peopleInfosUpdate)
+        } catch(e){
+            return res.status(500).json(e.message)
+        }
+    }
+
+    //delete register
+    static async deletePeople(req, res){
+        const { id } = req.params
+         try{
+            await database.Pessoas.destroy({
+                where: {
+                    id: Number(id)
+                }
+            })
+            return res.status(200).json({message:'destroy sucessfull'})
+         } catch(e){            
+            return res.status(500).json(e.message)
+         }
+    }
 }
 module.exports = PessoaController
