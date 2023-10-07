@@ -12,6 +12,6 @@ router
     .get('/pessoas/:estudanteId/matricula/:matriculaId', PessoaController.getDataMatricula) //pega informações de matricula relacionado a pessoas
     .post('/pessoas/:estudanteId/matricula', PessoaController.createDataMatricula) //cria um registro de matricula
     .put('/pessoas/:estudanteId/matricula/:matriculaId', PessoaController.updateMatricula) //atualiza dados de matricula
-    .delete('/pessoas/:estudanteId/matricula/:matriculaId', PessoaController.deleteMatricula)
+    .delete('/pessoas/:estudanteId/matricula/:matriculaId', PessoaController.deleteMatricula) //apaga dados de matricula
 
 module.exports = router
