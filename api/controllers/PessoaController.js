@@ -23,6 +23,7 @@ class PessoaController {
         }
     }
 
+    //create register
     static async createDataPeople(req, res){
         const newPeople = req.body
         try{
@@ -56,7 +57,7 @@ class PessoaController {
         }
     }
 
-    //delete register
+    //delete register Pessoas
     static async deletePeople(req, res){
         const { id } = req.params
          try{
@@ -70,5 +71,72 @@ class PessoaController {
             return res.status(500).json(e.message)
          }
     }
+    //encontra a matricula com base no id da tablea Pessoas
+    static async getDataMatricula(req, res){
+        const { estudanteId, matriculaId } = req.params
+        try{
+            const dataMatricula = await database.Matriculas.findOne({
+                where: {
+                    id: Number(matriculaId),
+                    estudante_id: Number(estudanteId)
+                }
+            }) 
+            return res.status(200).json(dataMatricula)
+        }catch(e){
+            return res.status(500).json(e.message)
+        }
+    }
+
+     //create register matricula
+     static async createDataMatricula(req, res){
+        const { estudanteId } = req.params
+        const { newMatricula } = {...req.body, estudante_id: Number(estudanteId)}
+        try{
+            const newMatriculaCreated = await database.Pessoas.create(newMatricula)
+            return res.status(200).json(newMatriculaCreated)
+
+        } catch(e){
+            return res.status(500).json(e.message)
+        }
+    }
+
+    //Update Matricula
+    static async updateMatricula(req, res){
+        const { estudanteId, matriculaId } = req.params
+        const newInfos = req.body
+        try{
+            await database.Matriculas.update(newInfos, {
+                where: {
+                    id: Number(matriculaId),
+                    estudante_id: Number(estudanteId)
+                }
+            })
+         
+            const MatriculasInfosUpdate = await database.Matriculas.findOne({ //retorna o registro atualizado
+                where: {
+                    id: Number(matriculaId)}
+            })
+
+            return res.status(200).json(MatriculasInfosUpdate)
+        } catch(e){
+            return res.status(500).json(e.message)
+        }
+    }
+
+    //delete register Matricula
+    static async deleteMatricula(req, res){
+        const { estudanteId, matriculaId } = req.params
+         try{
+            await database.Matriculas.destroy({
+                where: {
+                    id: Number(matriculaId)
+                }
+            })
+            return res.status(200).json({message:'destroy sucessfull'})
+         } catch(e){            
+            return res.status(500).json(e.message)
+         }
+    }
+
 }
 module.exports = PessoaController
